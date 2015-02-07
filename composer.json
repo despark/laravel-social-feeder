@@ -1,0 +1,21 @@
+{
+    "name": "despark/laravel-social-feeder",
+    "description": "",
+    "authors": [
+        {
+            "name": "Yavor Mihaylov",
+            "email": "ymihaylov@despark.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+        "tteroauth": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Despark\\LaravelSocialFeeder": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
