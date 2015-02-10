@@ -1,6 +1,8 @@
 {
     "name": "despark/laravel-social-feeder",
-    "description": "",
+    "description": "Social feeder for laravel. With this you can get feed from facebook page, twitter account or instragram",
+    "keywords": ["framework", "laravel", "despark", "facebook", "instagram", "twitter", "feeder", "feed", "social-feeder"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Yavor Mihaylov",
