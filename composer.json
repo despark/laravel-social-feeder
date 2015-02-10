@@ -20,5 +20,5 @@
             "Despark\\LaravelSocialFeeder": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
