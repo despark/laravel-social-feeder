@@ -13,12 +13,15 @@
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
         "sammyk/laravel-facebook-sdk": "~1.1",
-        "kertz/twitteroauth": "dev-master@dev"
+        "kertz/twitteroauth": "dev-master"
     },
     "autoload": {
         "psr-0": {
             "Despark\\LaravelSocialFeeder": "src/"
-        }
+        },
+        "classmap": [
+            "vendor/kertz/twitteroauth/twitteroauth"
+        ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
