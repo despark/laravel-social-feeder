@@ -24,7 +24,7 @@ class LaravelSocialFeederServiceProvider extends ServiceProvider {
 
 	public function boot()
 	{
-		$this->package('despark/social-feeder');
+		$this->package('despark/laravel-social-feeder');
 
 		AliasLoader::getInstance()->alias('SocialFeeder', 'Despark\LaravelSocialFeeder\SocialFeeder');
 	}

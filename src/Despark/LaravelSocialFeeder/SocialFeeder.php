@@ -9,26 +9,18 @@ class SocialFeeder {
 
 	public static function updateTwitterPosts()
 	{
-		// Config::get('');
-
-		// This should be in config
-		$consumerKey = 'JvXHFRFtON6PFeqzzPKuYzqWl';
-		$consumerSecret = 'C4hjh8k9TTUVqXTFjb4GdnK9IeYc4YGdpa6Hl8Uvc4G4nFuEaX';
-		$accessToken = '192664878-cho3bZ0piKCJaCqQTCHl0eyFOJZo3Lj363GPmzhx';
-		$accessTokenSecret = 'dhvsEOMGGmo3txrLr7lXse6rxmUe5fcM3xTxCW18jRCCN';
-
 		$connection = new \TwitterOAuth(
-			$consumerKey,
-			$consumerSecret,
-			$accessToken,
-			$accessTokenSecret
+			Config::get('laravel-social-feeder::twitterCredentials.consumerKey'),
+			Config::get('laravel-social-feeder::twitterCredentials.consumerSecret'),
+			Config::get('laravel-social-feeder::twitterCredentials.accessToken'),
+			Config::get('laravel-social-feeder::twitterCredentials.accessTokenSecret')
 		);
 
-		$connection->host = 'https://api.twitter.com/1.1/';
+		$connection->host = Config::get('laravel-social-feeder::twitterCredentials.host');
 
 		// Screen Name in config
 		$params = array(
-            'screen_name' => 'Byal_Shtark',
+            'screen_name' => Config::get('laravel-social-feeder::twitterCredentials.screen_name'),
             'count' => 10,
         );
 
