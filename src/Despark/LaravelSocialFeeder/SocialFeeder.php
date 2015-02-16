@@ -2,9 +2,6 @@
 
 use Config;
 
-/**
-* Main class for the package
-*/
 class SocialFeeder {
 
 	public static function updateTwitterPosts()
