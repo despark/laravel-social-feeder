@@ -6,14 +6,12 @@ class SocialFeeder {
 
 	public static function updateTwitterPosts()
 	{
-		$connection = new \TwitterOAuth(
-			Config::get('laravel-social-feeder::twitterCredentials.consumerKey'),
-			Config::get('laravel-social-feeder::twitterCredentials.consumerSecret'),
-			Config::get('laravel-social-feeder::twitterCredentials.accessToken'),
-			Config::get('laravel-social-feeder::twitterCredentials.accessTokenSecret')
-		);
-
-		$connection->host = Config::get('laravel-social-feeder::twitterCredentials.host');
+        $connection = new \Abraham\TwitterOAuth\TwitterOAuth(
+            Config::get('laravel-social-feeder::twitterCredentials.consumerKey'),
+            Config::get('laravel-social-feeder::twitterCredentials.consumerSecret'),
+            Config::get('laravel-social-feeder::twitterCredentials.accessToken'),
+            Config::get('laravel-social-feeder::twitterCredentials.accessTokenSecret')
+        );
 
 		$params = array(
             'screen_name' => Config::get('laravel-social-feeder::twitterCredentials.screen_name'),
@@ -33,7 +31,7 @@ class SocialFeeder {
 
         try
         {
-            $tweets = $connection->get('/statuses/user_timeline.json?'.http_build_query($params));
+            $tweets = $connection->get('statuses/user_timeline', $params);
         }
         catch (Exception $e)
        	{
