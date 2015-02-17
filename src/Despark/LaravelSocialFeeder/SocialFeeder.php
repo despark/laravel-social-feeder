@@ -15,7 +15,6 @@ class SocialFeeder {
 
 		$connection->host = Config::get('laravel-social-feeder::twitterCredentials.host');
 
-		// Screen Name in config
 		$params = array(
             'screen_name' => Config::get('laravel-social-feeder::twitterCredentials.screen_name'),
             'count' => 10,
@@ -49,7 +48,7 @@ class SocialFeeder {
 			$newPostData = [
 	            'type' => 'twitter',
 				'social_id' => $tweet->id_str,
-				'url' => 'https://twitter.com/Byal_Shtark/status/'.$tweet->id_str,
+				'url' => 'https://twitter.com/'.$params['screen_name'].'/status/'.$tweet->id_str,
 				'text' => $tweet->text,
 				'show_on_page' => 1,
 				'published_at' => date('Y-m-d H:i:s', strtotime($tweet->created_at)),
