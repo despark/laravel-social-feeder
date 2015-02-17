@@ -23,6 +23,8 @@ Publish the config file:
 `php artisan config:publish despark/laravel-social-feeder`
 
 Then execute migration with the following command
+
 `php artisan migrate --package="despark/laravel-social-feeder"`
+
 
 This will create new table `social_posts`. In this table package store the posts from feeds.
