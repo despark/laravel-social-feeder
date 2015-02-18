@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use App;
 
 class LaravelSocialFeederServiceProvider extends ServiceProvider {
 
@@ -26,7 +27,10 @@ class LaravelSocialFeederServiceProvider extends ServiceProvider {
 	{
 		$this->package('despark/laravel-social-feeder');
 
+		App::register('SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider');
+
 		AliasLoader::getInstance()->alias('SocialFeeder', 'Despark\LaravelSocialFeeder\SocialFeeder');
+		AliasLoader::getInstance()->alias('Facebook', 'SammyK\LaravelFacebookSdk\FacebookFacade');
 	}
 
 	/**
