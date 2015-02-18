@@ -64,13 +64,12 @@ class SocialFeeder {
     public static function updateFacebookPosts()
     {
         Facebook::setAccessToken(Config::get('laravel-social-feeder::facebookCredentials.accessToken'));
-        // Facebook::setAccessToken('1519701654973430|yLbxi7_Nq3ijCkxZYHIQNU_3KSE');
 
-        $pageName = Config::get('laravel-social-feeder::facebookCredentials.accessToken');
+        $pageName = Config::get('laravel-social-feeder::facebookCredentials.pageName');
 
         $posts = Facebook::object($pageName.'/posts')->get()->all();
 
-        $lastPost = SocialPost::type('facebook')->orderBy('published_at', 'DESC')->first();
+        $lastPost = \SocialPost::type('facebook')->orderBy('published_at', 'DESC')->first();
 
         foreach ($posts as $post)
         {
@@ -94,7 +93,7 @@ class SocialFeeder {
                 'published_at' => $published_at,
             );
 
-            $newPostEntity = new SocialPost;
+            $newPostEntity = new \SocialPost;
             $newPostEntity->fill($newPostData)->save();
         }
 
