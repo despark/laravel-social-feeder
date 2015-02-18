@@ -11,4 +11,9 @@ return array(
 
         'screen_name' => '{screen_name}',
 	),
+
+	'facebookCredentials' => array(
+		'accessToken' => '{access_token}',
+		'pageName' => '{page_name}'
+	),
 );
