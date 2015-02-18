@@ -1,6 +1,8 @@
 <?php namespace Despark\LaravelSocialFeeder;
 
 use Config;
+use SammyK\LaravelFacebookSdk\LaravelFacebookSdk;
+use Facebook;
 
 class SocialFeeder {
 
@@ -56,6 +58,46 @@ class SocialFeeder {
 	        $newPostEntity->fill($newPostData)->save();
         }
 
-        echo 'done';
+        return true;
 	}
+
+    public static function updateFacebookPosts()
+    {
+        Facebook::setAccessToken(Config::get('laravel-social-feeder::facebookCredentials.accessToken'));
+        // Facebook::setAccessToken('1519701654973430|yLbxi7_Nq3ijCkxZYHIQNU_3KSE');
+
+        $pageName = Config::get('laravel-social-feeder::facebookCredentials.accessToken');
+
+        $posts = Facebook::object($pageName.'/posts')->get()->all();
+
+        $lastPost = SocialPost::type('facebook')->orderBy('published_at', 'DESC')->first();
+
+        foreach ($posts as $post)
+        {
+            $published_at = date('Y-m-d H:i:s', $post->get('created_time')->timestamp);
+
+            if ($lastPost and $lastPost->published_at >= $published_at)
+                continue;
+
+            if ( ! $post->get('message'))
+                continue;
+
+            $socialId = array_get(explode('_', $post->get('id')), 1);
+
+            $newPostData = array(
+                'type' => 'facebook',
+                'social_id' => $socialId,
+                'url' => 'https://www.facebook.com/'.$pageName.'/posts/'.$socialId,
+                'text' => $post->get('message'),
+                'image_url' => $post->get('picture'),
+                'show_on_page' => 1,
+                'published_at' => $published_at,
+            );
+
+            $newPostEntity = new SocialPost;
+            $newPostEntity->fill($newPostData)->save();
+        }
+
+        return true;
+    }
 }
