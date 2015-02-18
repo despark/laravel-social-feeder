@@ -99,4 +99,41 @@ class SocialFeeder {
 
         return true;
     }
+
+    public static function updateInstagramPosts()
+    {
+        $lastInstagramPost = \SocialPost::type('instagram')->latest('published_at')->get()->first();
+        $lastInstagramPostTimestamp = $lastInstagramPost ? strtotime($lastInstagramPost->published_at) : 0;
+
+        $clientId = Config::get('laravel-social-feeder::instagramCredentials.clientId');
+        $userId = Config::get('laravel-social-feeder::instagramCredentials.userId');
+
+        $url = 'https://api.instagram.com/v1/users/'.$userId.'/media/recent?count=5&client_id='.$clientId;
+        $json = file_get_contents($url);
+
+        $obj = json_decode($json);
+
+        $postsData = $obj->data;
+
+        foreach ($postsData as $post)
+        {
+            if ( $post->caption->created_time <= $lastInstagramPostTimestamp)
+                continue;
+
+            $newPostData = array(
+                'type' => 'instagram',
+                'social_id' => $post->caption->id,
+                'url' => $post->link,
+                'text' => $post->caption->text,
+                'image_url' => $post->images->standard_resolution->url,
+                'show_on_page' => 1,
+                'published_at' => date('Y-m-d H:i:s', $post->caption->created_time),
+            );
+
+            $newPostEntity = new \SocialPost;
+            $newPostEntity->fill($newPostData)->save();
+        }
+
+        return true;
+    }
 }

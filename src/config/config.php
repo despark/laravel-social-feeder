@@ -16,4 +16,9 @@ return array(
 		'accessToken' => '{access_token}',
 		'pageName' => '{page_name}'
 	),
+
+	'instagramCredentials' => array(
+		'userId' => '{userId}',
+		'clientId' => '{clientId}',
+	),
 );
